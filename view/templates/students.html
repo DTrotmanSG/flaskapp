@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students</title>
+</head>
+<body>
+    <h2>Student List</h2>
+
+    {% for s in students %}
+        <p>{{ s.student_name }} — {{ s.course_name }}</p>
+    {% endfor %}
+
+    <br>
+    <a href="/quiz">Take the Quiz</a>
+</body>
+</html>
