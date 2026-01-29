@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="alert alert-success mt-4">
+    <h2>{{ name }}, you should study <strong>{{ best_course }}</strong></h2>
+</div>
+
+<a href="/students" class="btn btn-primary mt-3">View Students</a>
+<a href="/quiz" class="btn btn-outline-secondary mt-3">Take Quiz Again</a>
+
+{% endblock %}
+

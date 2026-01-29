@@ -45,4 +45,4 @@ def quiz_submit():
 
     insert_student(name, course_id)
 
-    return f"<h1>{name}, you should study {best_course}</h1><a href='/students'>View Students</a>"
+    return render_template("result.html", name=name, best_course=best_course)

@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Home</title>
-</head>
-<body>
-    <h1>Welcome</h1>
-    <p><a href="/quiz">Take the Quiz</a></p>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+
+<div class="text-center mt-5">
+    <h1 class="display-4 mb-3">Welcome</h1>
+    <p class="lead">Ready to discover which course suits you best?</p>
+    <a href="/quiz" class="btn btn-primary btn-lg mt-3">Take the Quiz</a>
+</div>
+
+{% endblock %}

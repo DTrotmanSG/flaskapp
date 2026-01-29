@@ -6,4 +6,8 @@ def get_course_id_by_name(course_name):
     cursor.execute("SELECT id FROM courses WHERE name=%s", (course_name,))
     row = cursor.fetchone()
     conn.close()
-    return row["id"]
+
+    if row:
+        return row["id"]
+    return None
+
