@@ -1,66 +1,36 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="card shadow p-4 mb-5">
-    <h2 class="mb-4">Course Placement Quiz</h2>
+<h2 class="mb-4">UBS Talent Accelerator Assessment</h2>
 
-    <form method="POST">
+<form method="POST" action="/quiz">
 
-        <div class="mb-4">
-            <label class="form-label fw-bold">Which task sounds most interesting?</label>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="q1" value="cloud" required>
-                <label class="form-check-label">Cloud</label>
+    <div class="mb-3">
+        <label class="form-label">Your Name</label>
+        <input type="text" name="student_name" class="form-control" required>
+    </div>
+
+    {% for q in questions %}
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h5>{{ loop.index }}. {{ q.text }}</h5>
+
+            {% set letters = ["A", "B", "C", "D", "E"] %}
+
+            {% for option, letter in q.shuffled_options|zip(letters) %}
+            <div class="form-check mt-2">
+                <input class="form-check-input" type="radio"
+                       name="q{{ q.id }}" value="{{ letter }}" required>
+                <label class="form-check-label">
+                    {{ option[1] }}
+                </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="q1" value="python">
-                <label class="form-check-label">Python</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="q1" value="linux">
-                <label class="form-check-label">Linux</label>
-            </div>
+            {% endfor %}
         </div>
+    </div>
+    {% endfor %}
 
-        <div class="mb-4">
-            <label class="form-label fw-bold">What do you enjoy learning?</label>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="q2" value="cloud" required>
-                <label class="form-check-label">Cloud Services</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="q2" value="python">
-                <label class="form-check-label">Programming</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="q2" value="linux">
-                <label class="form-check-label">Infrastructure</label>
-            </div>
-        </div>
-
-        <div class="mb-4">
-            <label class="form-label fw-bold">What describes you best?</label>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="q3" value="cloud" required>
-                <label class="form-check-label">Curious</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="q3" value="python">
-                <label class="form-check-label">Creative</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="q3" value="linux">
-                <label class="form-check-label">Logical</label>
-            </div>
-        </div>
-
-        <div class="mb-4">
-            <label class="form-label fw-bold">Your Name:</label>
-            <input type="text" name="student_name" class="form-control" required>
-        </div>
-
-        <button type="submit" class="btn btn-success w-100">Submit</button>
-    </form>
-</div>
+    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+</form>
 
 {% endblock %}

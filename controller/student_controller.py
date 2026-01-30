@@ -5,5 +5,5 @@ student_blueprint = Blueprint("students", __name__)
 
 @student_blueprint.route("/students")
 def students():
-    rows = get_all_students()
-    return render_template("students.html", students=rows)
+    students = get_all_students()
+    return render_template("students.html", students=students)

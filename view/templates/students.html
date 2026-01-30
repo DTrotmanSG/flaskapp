@@ -11,14 +11,14 @@
                 <thead class="table-dark">
                     <tr>
                         <th>Name</th>
-                        <th>Recommended Course</th>
+                        <th>Recommended Track</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for s in students %}
                     <tr>
                         <td>{{ s.student_name }}</td>
-                        <td>{{ s.course_name }}</td>
+                        <td>{{ s.track_name }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
