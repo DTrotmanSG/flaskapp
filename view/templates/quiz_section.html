@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="quiz-container">
+
+    <!-- Header -->
+    <h1 class="mb-2">UBS Talent Accelerator Assessment</h1>
+
+    <!-- Section progress text -->
+    <p class="quiz-section-meta">
+        Section {{ section_index + 1 }} of {{ total_sections }}
+    </p>
+
+    <!-- Section title -->
+    <h2 class="quiz-section-title">{{ section_label }}</h2>
+
+    <!-- Section description -->
+    {% if section_description %}
+        <p class="quiz-section-description">{{ section_description }}</p>
+    {% endif %}
+
+    <!-- Question count -->
+    <p class="quiz-section-questions-count">
+        {{ questions|length }} questions
+    </p>
+
+    <!-- Progress bar -->
+    <div class="quiz-progress mb-3">
+        {% for i in range(total_sections) %}
+            <div class="quiz-progress-step {% if i <= section_index %}active{% endif %}"></div>
+        {% endfor %}
+    </div>
+
+    <!-- Global error -->
+    {% if error %}
+        <div class="alert alert-danger mb-4">{{ error }}</div>
+    {% endif %}
+
+    <!-- Form -->
+    <form method="post" action="{{ url_for('quiz.quiz_submit_section') }}">
+        <input type="hidden" name="section_name" value="{{ section_name }}">
+
+        {% for q in questions %}
+            <div class="quiz-question {% if q.is_missing %}quiz-question-missing{% endif %}">
+
+                <!-- Continuous numbering -->
+                <p>
+                    <strong>{{ loop.index + questions_before }}.</strong>
+                    {{ q.text }}
+                </p>
+
+                <!-- Per-question error -->
+                {% if q.is_missing %}
+                    <div class="question-error">Please answer this question.</div>
+                {% endif %}
+
+                <!-- Options -->
+                {% for opt in q.options %}
+                    <label class="quiz-option">
+                        <input type="radio"
+                               name="q{{ q.id }}"
+                               value="{{ opt.letter }}"
+                               {% if q.selected == opt.letter %}checked{% endif %}>
+                        <span>{{ opt.letter }}. {{ opt.text }}</span>
+                    </label>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <!-- Navigation buttons -->
+        <div class="quiz-nav-buttons">
+
+            <button type="submit" class="quiz-button quiz-button-primary">
+                {% if section_index + 1 == total_sections %}
+                    View Summary
+                {% else %}
+                    {% if next_section_label %}
+                        Next: {{ next_section_label }}
+                    {% else %}
+                        Next →
+                    {% endif %}
+                {% endif %}
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+<!-- Auto-scroll to first missing question -->
+{% if error %}
+<script>
+    const missing = document.querySelector('.quiz-question-missing');
+    if (missing) {
+        missing.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+</script>
+{% endif %}
+
+{% endblock %}

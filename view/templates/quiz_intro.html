@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="quiz-intro">
+
+    <h1 class="mb-2">UBS Talent Accelerator</h1>
+    <h2 class="mb-4">Track Matching Assessment</h2>
+
+    <p>
+        Welcome to the UBS Talent Accelerator.  
+        This assessment helps match you to the track that best aligns with your skills,
+        interests, and career goals. There are no “right” or “wrong” answers — we’re simply
+        looking to understand your profile.
+    </p>
+
+    <p class="mt-3">
+        The assessment takes approximately <strong>10–15 minutes</strong> and covers five key areas:
+    </p>
+
+    <ul class="mt-2">
+        <li><strong>Skills & Experience</strong> — your technical background and exposure</li>
+        <li><strong>Technical Aptitude</strong> — how you approach problem‑solving</li>
+        <li><strong>Work Style</strong> — your preferred way of working</li>
+        <li><strong>Career Motivation</strong> — what drives your career path</li>
+        <li><strong>Personality Fit</strong> — your communication and collaboration style</li>
+    </ul>
+
+    <p class="mt-4">
+        <strong>Be authentic in your responses.</strong>
+        This assessment is designed to help you find the best track fit.
+    </p>
+
+    {% if error %}
+        <div class="alert alert-danger mt-3">{{ error }}</div>
+    {% endif %}
+
+    <form method="post" action="{{ url_for('quiz.quiz_start') }}" class="mt-4 quiz-intro-form">
+
+        <label for="student_name" class="form-label fw-semibold">Your Name</label>
+
+        <input type="text"
+               id="student_name"
+               name="student_name"
+               value="{{ default_name or '' }}"
+               required
+               class="form-control mb-3">
+
+        <button type="submit" class="quiz-button quiz-button-primary">
+            Start Assessment
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

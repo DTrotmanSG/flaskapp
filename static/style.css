@@ -1,0 +1,67 @@
+:root {
+    --ubs-red: #E60000;
+    --ubs-red-dark: #C00000;
+    --ubs-black: #000000;
+    --ubs-grey: #E5E5E5;
+    --ubs-white: #FFFFFF;
+}
+
+/* Global */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--ubs-white);
+    color: var(--ubs-black);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--ubs-white) !important;
+    border-bottom: 1px solid var(--ubs-grey);
+}
+
+/* Brand text */
+.navbar-brand {
+    color: var(--ubs-black) !important;
+    font-weight: 600;
+}
+
+/* Only the UBS part in red */
+.ubs-red {
+    color: var(--ubs-red) !important;
+    font-weight: 700;
+}
+
+/* Navbar links */
+.nav-link {
+    color: var(--ubs-black) !important;
+}
+
+.nav-link:hover {
+    color: var(--ubs-red) !important;
+    text-decoration: underline;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--ubs-red) !important;
+    border-color: var(--ubs-red) !important;
+    color: var(--ubs-white) !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--ubs-red-dark) !important;
+    border-color: var(--ubs-red-dark) !important;
+}
+
+/* Inputs */
+.form-control {
+    border: 1px solid var(--ubs-grey);
+}
+
+/* Section spacing */
+.container {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}

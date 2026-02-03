@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="quiz-container">
+
+    <h1 class="mb-3">Review Your Answers</h1>
+    <p class="mb-3">
+        Take a moment to review your responses before viewing your track recommendation.
+    </p>
+
+    {% for section in sections %}
+        <div class="quiz-review-section mb-4">
+            <h2 class="quiz-section-title">{{ section.label }}</h2>
+
+            <ul class="quiz-review-question-list">
+                {% for q in section.questions %}
+                    <li class="quiz-review-question">
+                        <p><strong>{{ q.text }}</strong></p>
+                        {% if q.selected_letter %}
+                            <p>
+                                <strong>Selected:</strong>
+                                {{ q.selected_letter }} — {{ q.selected_text }}
+                            </p>
+                        {% else %}
+                            <p><em>No answer recorded.</em></p>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+
+    <div class="quiz-nav-buttons">
+        <a href="{{ url_for('quiz.quiz_section', section_name='personality_fit') }}"
+           class="quiz-button quiz-button-secondary">
+            Back to Final Section
+        </a>
+
+        <a href="{{ url_for('quiz.quiz_results') }}"
+           class="quiz-button quiz-button-primary">
+            View Results
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

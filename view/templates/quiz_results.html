@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="quiz-results">
+
+    <!-- Header -->
+    <h1 class="mb-3">Track Recommendation</h1>
+
+    <p class="lead">Thank you, {{ name }}.</p>
+
+    <!-- Primary Track -->
+    <h2 class="recommended-track mt-4">{{ best_track }}</h2>
+
+    <!-- Confidence -->
+    <p class="confidence-label mt-2">
+        <strong>Confidence Level:</strong> {{ confidence }}
+    </p>
+
+    <!-- Why this track fits -->
+    <h3 class="mt-4">Why this track fits you</h3>
+    <p>{{ reasoning }}</p>
+
+    <!-- Track description -->
+    <h3 class="mt-4">About this track</h3>
+    <p>{{ track_description }}</p>
+
+    <!-- Secondary track -->
+    <h3 class="mt-4">Secondary Track Suggestion</h3>
+    <p>{{ secondary_track }}</p>
+
+    <!-- Score breakdown -->
+    <h3 class="mt-4">Score Breakdown</h3>
+    <ul class="score-breakdown">
+        {% for track, score in scores %}
+            <li><strong>{{ track }}</strong>: {{ score }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Actions -->
+    <div class="quiz-nav-buttons mt-4">
+
+        <!-- FIXED: correct endpoint name -->
+        <a href="{{ url_for('quiz.quiz_export_pdf') }}"
+           class="quiz-button quiz-button-secondary">
+            Export Results
+        </a>
+
+        <a href="{{ url_for('quiz.quiz_start') }}"
+           class="quiz-button quiz-button-tertiary">
+            ↻ Start Over
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

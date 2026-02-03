@@ -1,8 +1,9 @@
 from model.db import get_connection
+import pymysql
 
 def get_course_id_by_name(course_name):
     conn = get_connection()
-    cursor = conn.cursor(dictionary=True)
+    cursor = conn.cursor(pymysql.cursors.DictCursor)
 
     query = "SELECT id FROM courses WHERE name = %s"
     cursor.execute(query, (course_name,))
@@ -14,4 +15,3 @@ def get_course_id_by_name(course_name):
     if row:
         return row["id"]
     return None
-
